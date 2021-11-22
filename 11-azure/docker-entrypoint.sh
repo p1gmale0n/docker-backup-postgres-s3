@@ -2,6 +2,19 @@
 # vim: set noexpandtab ts=4 sw=4 nolist:
 set -Eeo pipefail
 
+if [ -z "${AZURE_SP_CLIENT_ID}" ]; then
+	echo "You need to set the AZURE_SP_CLIENT_ID environment variable."
+	exit 1
+fi
+if [ -z "${AZURE_SP_CLIENT_SECRET}" ]; then
+	echo "You need to set the AZURE_SP_CLIENT_SECRET environment variable."
+	exit 1
+fi
+if [ -z "${AZURE_AZ_TENANT_ID}" ]; then
+	echo "You need to set the AZURE_AZ_TENANT_ID environment variable."
+	exit 1
+fi
+
 if [ -z "${AZURE_STORAGE_ACCOUNT}" ]; then
 	echo "You need to set the AZURE_STORAGE_ACCOUNT environment variable."
 	exit 1
