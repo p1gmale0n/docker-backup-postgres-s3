@@ -25,7 +25,6 @@ pg_dump $POSTGRES_HOST_OPTS $POSTGRES_DATABASE | gzip > dump.sql.gz
 
 echo "Uploading dump to daily/${POSTGRES_DATABASE}-`date +%Y%m%d-%H%M%S`.sql.gz"
 
-az login --service-principal -u ${AZURE_SP_CLIENT_ID} -p ${AZURE_SP_CLIENT_SECRET} --tenant ${AZURE_AZ_TENANT_ID}
 az storage blob upload --container-name ${AZURE_CONTAINER_NAME} --file dump.sql.gz --name "daily/${POSTGRES_DATABASE}-`date +%Y%m%d-%H%M%S`.sql.gz"
 
 echo "SQL backup uploaded successfully"
