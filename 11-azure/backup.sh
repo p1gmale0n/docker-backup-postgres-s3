@@ -14,7 +14,7 @@ fi
 # env vars needed for aws tools
 export AZURE_STORAGE_ACCOUNT=${AZURE_STORAGE_ACCOUNT}
 export AZURE_STORAGE_KEY=${AZURE_STORAGE_KEY}
-export CONTAINER_NAME=${CONTAINER_NAME}
+export AZURE_CONTAINER_NAME=${AZURE_CONTAINER_NAME}
 
 export PGPASSWORD=$POSTGRES_PASSWORD
 POSTGRES_HOST_OPTS="-h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER $POSTGRES_EXTRA_OPTS"
@@ -26,6 +26,6 @@ pg_dump $POSTGRES_HOST_OPTS $POSTGRES_DATABASE | gzip > dump.sql.gz
 echo "Uploading dump to daily/${POSTGRES_DATABASE}-`date +%Y%m%d-%H%M%S`.sql.gz"
 
 az login --service-principal -u ${AZURE_SP_CLIENT_ID} -p ${AZURE_SP_CLIENT_SECRET} --tenant ${AZURE_AZ_TENANT_ID}
-az storage blob upload --container-name $CONTAINER_NAME --file dump.sql.gz --name "daily/${POSTGRES_DATABASE}-`date +%Y%m%d-%H%M%S`.sql.gz"
+az storage blob upload --container-name ${AZURE_CONTAINER_NAME} --file dump.sql.gz --name "daily/${POSTGRES_DATABASE}-`date +%Y%m%d-%H%M%S`.sql.gz"
 
 echo "SQL backup uploaded successfully"

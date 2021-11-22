@@ -25,8 +25,8 @@ if [ -z "${AZURE_STORAGE_KEY}" ]; then
 	exit 1
 fi
 
-if [ -z "${CONTAINER_NAME}" ]; then
-	echo "You need to set the CONTAINER_NAME environment variable."
+if [ -z "${AZURE_CONTAINER_NAME}" ]; then
+	echo "You need to set the AZURE_CONTAINER_NAME environment variable."
 	exit 1
 fi
 
